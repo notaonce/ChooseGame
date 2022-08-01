@@ -1,27 +1,30 @@
-from operator import mod
-from statistics import mode
-from tkinter import CASCADE
+
 from django.db import models
+from django.contrib.auth import get_user_model
+
 
 # Create your models here.
 
-class Paragraph(models.Model):
-    para_num = models.CharField(verbose_name='PARA_NUM', max_length=100)
-    def __str__(self):
-        return f'{self.para_num}'
+#스토리보드(문단)
 
-class Content(models.Model):
-    paragraph = models.ForeignKey(Paragraph, on_delete=models.CASCADE, related_name='content')
+class Storyboard(models.Model):
+    storyboard_name = models.CharField(verbose_name='STORYBOARD_NAME', max_length=100, default="")
     content = models.TextField()
+    choice_attack = models.CharField(max_length=100, default='')
+    choice_defence = models.CharField(max_length=100, default='')
+    brave = models.IntegerField(default=0)
+    wisdom = models.IntegerField(default=0)
+    damage = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'{self.paragraph}'
+        return f'{self.storyboard_name}'
 
-class Choice(models.Model) :
-    content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='choice')
-    CHOICES = (
-        ('', 'NONE'),        
-        ('AT', 'ATTACK'),
-        ('DE', 'DEFFENCE'),
-    )
-    choice = models.CharField(max_length=2, choices=CHOICES, default=CHOICES[0][0])
+class UserStatus(models.Model) :
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='userStatic')
+    hp = models.IntegerField(default=5)
+    brave = models.IntegerField(default=0)
+    wisdom = models.IntegerField(default=0)
+    savepoint = models.CharField(default='0', max_length=100)
+
+    def __str__(self):
+        return f'{self.user}'

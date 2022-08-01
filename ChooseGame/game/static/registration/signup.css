@@ -1,0 +1,18 @@
+.signupContainer{    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    
+}
+
+#signupButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signupContainer div {
+    margin-bottom: 10px;
+}

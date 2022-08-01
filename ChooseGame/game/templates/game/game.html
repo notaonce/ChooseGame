@@ -1,0 +1,44 @@
+{% extends 'game/base.html' %}{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'game/game.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <div class="content">
+       <p>{{ storyboard.content | linebreaks }}</p> 
+    </div>
+    <div class="buttonContainer">
+        <div class="attackButton">
+            <a id="attackButton" href="{% url 'game:game' storyboard.choice_attack %}">공격</a>
+        </div>
+        <div class="defenceButton">
+            <a id="defenceButton" href="{% url 'game:game' storyboard.choice_defence %}">수비</a>
+        </div>
+    </div>
+    <nav class="eventContainer">
+        <div id="damage">{{ storyboard.damage }}</div>
+        <div id="attainedBrave">{{ storyboard.brave }}</div>
+        <div id="attainedWisdom">{{ storyboard.wisdom }}</div>
+    </nav>
+    <nav class="statusContainer">        
+        <div id="hp">
+            <span class="material-symbols-outlined" style="font-size: 40px;">
+                favorite
+            </span>
+            {{ userstatus.hp }}
+        </div>
+        <div id="brave">
+            <span class="material-symbols-outlined" style="font-size: 40px;">
+                swords
+            </span>
+            {{ userstatus.brave }}
+        </div>
+        <div id="wisdom">
+            <span class="material-symbols-outlined" style="font-size: 40px;">
+            shield
+            </span> 
+            {{ userstatus.wisdom }}
+        </div>
+    </nav>
+
+{% endblock content%}

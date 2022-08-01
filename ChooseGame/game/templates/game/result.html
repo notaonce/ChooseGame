@@ -1,0 +1,13 @@
+{% extends 'game/base.html' %} {% block css %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'game/home.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="bodyContainer">
+    <div class="title">Result</div>
+        당신은 죽었습니다!
+    <a class="start_button" href="{% url 'game:home' %}">
+        홈으로
+    </a>
+</div>
+{% endblock content %}

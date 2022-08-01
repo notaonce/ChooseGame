@@ -1,0 +1,24 @@
+.start_button {
+    color: red;
+    text-decoration: none;
+}
+
+.start_button:hover{
+    color:gray;
+}
+
+.bodyContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.title {
+    font-size: 5vh;
+}
+
+.loginFirst {
+    margin-top : 15px;
+}

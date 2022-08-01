@@ -1,0 +1,96 @@
+.content {
+    display: flex;
+    align-items:baseline;
+    flex-direction: column;
+    overflow: auto;
+    width:80vw;
+    height:60vh;
+    text-align:left;
+    font-size: 20px;
+}
+
+.statusContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom:5vh;
+}
+
+.statusContainer div {
+    font-size: 40px;
+    display: flex;
+    justify-content: space-around;
+    width: 15vw;
+    align-items: center;
+    text-align: center;
+}
+
+
+.eventContainer {
+    display: flex;
+    justify-content: space-around;
+    bottom:5vh;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.eventContainer div {
+    margin-top : 5vh;    
+    font-size: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 70vw;
+    margin-top : 5vh;    
+}
+
+.buttonContainer a {
+    text-decoration: none;
+    font-size: 5vh;
+}
+
+.buttonContainer #attackButton{
+    color : #FF6B6B;
+}
+
+
+.buttonContainer #attackButton:hover {
+    color : rgb(255, 57, 57)
+}
+
+
+.buttonContainer #attackButton:active {
+    color : rgb(255, 57, 57)
+}
+
+.buttonContainer #attackButton::after{
+    color: #FF6B6B;
+}
+
+
+.buttonContainer #defenceButton{
+    color : rgb(77, 150, 255);
+}
+
+
+.buttonContainer #defenceButton:hover{
+    color : rgb(27, 100, 255)
+}
+
+
+.buttonContainer #defenceButton:active{
+    color : rgb(27, 100, 255)
+}
+
+
+.buttonContainer #defenceButton::after{
+    color : rgb(77, 150, 255);
+}
+
+
+.example::-webkit-scrollbar {
+    display: none;
+}

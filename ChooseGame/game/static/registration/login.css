@@ -1,0 +1,18 @@
+.loginContainer{    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    
+}
+
+#loginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginContainer div {
+    margin-bottom: 10px;
+}
