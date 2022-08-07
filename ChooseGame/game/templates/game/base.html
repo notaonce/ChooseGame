@@ -11,6 +11,7 @@
     {% endblock css %}
     <link rel="stylesheet" type="text/css" href="{% static 'game/base.css' %}">
 </head>
+
 <body>
     <nav id="topMenu">
         <ul class="topMenuContainer">
@@ -18,7 +19,7 @@
             <li class="topMenuItem" id="username">{{user.username}}</li>
                 {% if user.is_superuser %}
                 <li class="topMenuItem" id="superuserAlert">제작자 계정</li>
-                <li><a class="topMenuItem" id="list" href="{% url 'game:list' %}">게임 편집</a></li>
+                <li><a class="topMenuItem" id="list" href="{% url 'game:list' %}">편집하기</a></li>
                 {% endif %}
             <li><a class="topMenuItem" id="logout" href="{% url 'game:logout' %}">로그아웃하기</a></li>
             {% else %}
@@ -28,27 +29,35 @@
             <li><a class="topMenuItem" id="toHome" href="{% url 'game:home' %}">홈으로</a></li>
         </ul>
     </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="message">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <script type="text/javascript">
+        const $ = ( selector ) => document.querySelector( selector );
+        const message = $("#message");
+        const messageAutoDismiss = () => {
+            setTimeout(() => {
+            message.style.display='none';
+        }, 3000);
+        };
+        const checkNull = (value) => {
+            if (typeof value == "undefined" || value == "" || value == null){
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        if(checkNull(message) == true){
+            messageAutoDismiss()
+        }
+    </script>
     {% block content %} {% endblock content %}
-</body>
-<script type="text/javascript">
-    const $ = ( selector ) => document.querySelector( selector );
-    const message = $("#message");
-    const messageAutoDismiss = () => {
-        setTimeout(() => {
-        message.style.display='none';
-    }, 3000);
-    };
-    const checkNull = (value) => {
-        if (typeof value == "undefined" || value == "" || value == null){
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    if(checkNull(message) == true){
-        messageAutoDismiss()
-    }
 
-</script>
+</body>
+
 </html>

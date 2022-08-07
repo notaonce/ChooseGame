@@ -6,23 +6,49 @@
 <form method="POST" name="frm" onSubmit="return Checkform()">
     {% csrf_token %}
     <div>
-        <textarea name="storyboard_name"></textarea>
+        <label for="storyboard_name">제목</label>
+        <br>
+        <textarea id="storyboard_name" name="storyboard_name"></textarea>
     </div>
     <div>
-        <textarea name="content"></textarea>
+        <label for="content">내용</label>
+        <br>
+        <textarea id="content" name="content"></textarea>
     </div>
     <div>
-        <input class="brave" name="brave" value="0" type="number" min='-10' max="10">
-        <input class="wisdom" name="wisdom" value="0" type="number" min='-10' max="10">
-        <input class="damage" name="damage" value="0" type="number" min="-10" max="10">
+        <label for="brave">용기 부여</label>
+        <br>
+        <input id="brave" class="brave" name="brave" value="0" type="number" min='-10' max="10">
+        <br>
+        <label for="wisdom">지혜 부여</label>
+        <br>
+        <input id="wisdom" class="wisdom" name="wisdom" value="0" type="number" min='-10' max="10">
+        <br>
+        <label for="damage">대미지(음수=힐)</label>
+        <br>
+        <input id="damage" class="damage" name="damage" value="0" type="number" min="-10" max="10">
     </div>
     <div>
-        <textarea name="choice_attack"></textarea>
+        <label for="attack">공격 선택지</label>
+        <br>
+        <input type="text" id="attack" name="choice_attack" list="attack_option">
+        <datalist id="attack_option">
+            {% for storyboard in storyboards %}
+            <option value="{{storyboard.storyboard_name}}"></option>
+            {% endfor %}
+        </datalist>
     </div>
     <div>
-        <textarea name="choice_defence"></textarea>
+        <label for="defence">수비 선택지</label>
+        <br>
+        <input type="text" id="attack" name="choice_defence" list="defence_option">
+        <datalist id="defence_option">
+            {% for storyboard in storyboards %}
+            <option value="{{storyboard.storyboard_name}}"></option>
+            {% endfor %}
+        </datalist>
     </div>
-    <button type="submit">수정하기</button></form>
+    <button type="submit">생성하기</button></form>
 <script>
     function Checkform() {
         if( frm.storyboard_name.value == "") {
@@ -31,17 +57,17 @@
             return false;
         }
         if( frm.content.value == "") {
-            frm.storyboard_name.focus()
+            frm.content.focus()
             alert("지문을 입력해주세요.")
             return false;
         }
         if( frm.choice_attack.value == "") {
-            frm.storyboard_name.focus()
+            frm.choice_attack.focus()
             alert("공격 선택지와 연결되는 스토리보드의 이름을 입력해주세요.")
             return false;
         }
         if( frm.choice_defence.value == "") {
-            frm.storyboard_name.focus()
+            frm.choice_defence.focus()
             alert("수비 선택지와 연결되는 스토리보드의 이름을 입력해주세요.")
             return false;
         }

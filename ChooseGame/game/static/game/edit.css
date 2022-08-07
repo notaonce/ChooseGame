@@ -1,0 +1,50 @@
+form {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+
+.modal-container {
+    z-index: 5;
+    position: fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background: rgba(0,0,0,0.5);  
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-container .modal {
+    display: flex;
+    position: relative;
+    width : 20vw;
+    height : 20vh;  
+    background-color: white;
+    justify-content:space-around;
+    text-align: center;
+    border: 2px black solid;
+    padding: 10vh 20vw;
+    border-radius: 10px;
+    flex-direction: column;
+    
+}
+
+.modal-container .modal button {
+    padding : 2vh 2vw;  
+    font-size : 24px;
+    margin-top  : 2vh;   
+
+}
+
+.modal-container.open {
+    opacity: 1;
+    visibility: visible;
+}

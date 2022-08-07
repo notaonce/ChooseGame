@@ -3,15 +3,27 @@
 {% endblock css %}
 
 {% block content %}
-<div class="bodyContainer">
+<ul class="bodyContainer">
     {% for storyboard in storyboards %}
-        <div class="storyboard_name">
-            <a href="{% url 'game:edit' storyboard.storyboard_name %}">{{ storyboard.storyboard_name }}</a> 
-        </div>
+        <li class="storyboardInfo">
+            <button class="storyboardInfoContainer" onclick="location.href='/edit/{{storyboard.storyboard_name}}'">
+                <div class="link">
+                    <a>{{ storyboard.storyboard_name }}</a>
+                </div>
+                <div class="choiceContainer">
+                    <div class="choice">
+                        <p>공격 : {{ storyboard.choice_attack }}</p>
+                    </div>
+                    <div class="choice">
+                        <p>수비 : {{ storyboard.choice_defence }}</p>
+                    </div>
+                </div>
+            </button>
+        </li>
     {% endfor %}
-    <div class="new">
-        <a href="{% url 'game:new' %}">새로운 선택지 만들기</a>
-    </div>
+</ul>
+<div class="new">
+    <a href="{% url 'game:new' %}">새로운 선택지 만들기</a>
 </div>
 
 {% endblock content %}

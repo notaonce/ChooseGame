@@ -67,35 +67,37 @@ def logout(request):
 
 @login_required(login_url='/login')
 def game(request, storyboardname) :
-    storyboard = Storyboard.objects.get(storyboard_name=storyboardname)
-    if (storyboard is None) :
-        messages.add_message(request, '선택지에 해당하는 스토리보드가 존재하지 않습니다. 홈으로 돌아왔습니다.')
+    lenboard = Storyboard.objects.filter(storyboard_name=storyboardname)
+    if len(lenboard) == 0 :
+        messages.error(request, '선택지에 해당하는 스토리보드가 존재하지 않습니다. 홈으로 돌아왔습니다.')
         return redirect('game:home')
-    localstoryboardbrave = storyboard.brave
-    localstoryboardwisdom = storyboard.wisdom
-    localdamage = storyboard.damage
-    savepoint = storyboard.storyboard_name
+    else :
+        storyboard = Storyboard.objects.get(storyboard_name=storyboardname)
+        localstoryboardbrave = storyboard.brave
+        localstoryboardwisdom = storyboard.wisdom
+        localdamage = storyboard.damage
+        savepoint = storyboard.storyboard_name
 
-    user = request.user
-    originaluserstatus = UserStatus.objects.get(user=user)
-    localbrave = originaluserstatus.brave
-    localwisdom = originaluserstatus.wisdom
-    localhp=originaluserstatus.hp
-    usersavepoint = originaluserstatus.savepoint
+        user = request.user
+        originaluserstatus = UserStatus.objects.get(user=user)
+        localbrave = originaluserstatus.brave
+        localwisdom = originaluserstatus.wisdom
+        localhp=originaluserstatus.hp
+        usersavepoint = originaluserstatus.savepoint
 
-    if usersavepoint != storyboardname :
-        userstatuscalculate = UserStatus.objects.filter(user=user).update(
-            brave = localbrave+localstoryboardbrave,
-            wisdom = localwisdom+localstoryboardwisdom,
-            hp = localhp-localdamage,
-            savepoint=savepoint
-        )
+        if usersavepoint != storyboardname :
+            userstatuscalculate = UserStatus.objects.filter(user=user).update(
+                brave = localbrave+localstoryboardbrave,
+                wisdom = localwisdom+localstoryboardwisdom,
+                hp = localhp-localdamage,
+                savepoint=savepoint
+            )
 
-    resultUserStatus = UserStatus.objects.get(user=user)
-    resulthp = resultUserStatus.hp
-    if resulthp <= 0:
-        return redirect('game:result')
-    return render(request, "game/game.html", {"storyboard" : storyboard, "userstatus" : resultUserStatus})
+        resultUserStatus = UserStatus.objects.get(user=user)
+        resulthp = resultUserStatus.hp
+        if resulthp <= 0:
+            return redirect('game:result')
+        return render(request, "game/game.html", {"storyboard" : storyboard, "userstatus" : resultUserStatus})
 
 @login_required(login_url='/login')
 def result(request) :
@@ -128,8 +130,8 @@ def new(request) :
     if request.method == "POST" :
         storyboard = Storyboard.objects.filter(storyboard_name=request.POST['storyboard_name'])
         if (len(storyboard) > 0 ) :
-            error = "같은 이름의 스토리보드가 존재합니다. 스토리보드 이름을 변경해주세요."
-            return render(request, new.html, {'error' : error})
+            messages.error(request, '이름이 같은 스토리보드가 존재합니다. 이름을 변경해주세요.')
+            return render(request, 'game/new.html')
         else :
             Storyboard.objects.create(
                 storyboard_name = request.POST['storyboard_name'],
@@ -140,13 +142,14 @@ def new(request) :
                 wisdom = request.POST['wisdom'],
                 damage = request.POST['damage'],
             )
+        messages.success(request, '작성이 완료되었습니다.')
         return redirect('game:list')
     return render(request, 'game/new.html')
 
 @login_required(login_url='/login')
-def delete(request, storyboard_name) :
-    Storyboard.objects.get(storyboard_name=storyboard_name).delete()
-    messages.add_message(request, '성공적으로 삭제되었습니다!')
+def delete(request, name) :
+    Storyboard.objects.get(storyboard_name=name).delete()
+    messages.success(request, '성공적으로 삭제되었습니다!')
     return redirect('game:list')
 
 @login_required(login_url='/login')

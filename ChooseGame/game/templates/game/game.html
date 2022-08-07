@@ -7,14 +7,22 @@
     <div class="content">
        <p>{{ storyboard.content | linebreaks }}</p> 
     </div>
+    {% if storyboard.choice_attack != storyboard.choice_defence %}
+        <div class="buttonContainer">
+            <div class="attackButton">
+                <a id="attackButton" href="{% url 'game:game' storyboard.choice_attack %}">공격</a>
+            </div>
+            <div class="defenceButton">
+                <a id="defenceButton" href="{% url 'game:game' storyboard.choice_defence %}">수비</a>
+            </div>
+        </div>
+    {% else %}
     <div class="buttonContainer">
         <div class="attackButton">
-            <a id="attackButton" href="{% url 'game:game' storyboard.choice_attack %}">공격</a>
-        </div>
-        <div class="defenceButton">
-            <a id="defenceButton" href="{% url 'game:game' storyboard.choice_defence %}">수비</a>
+            <a id="attackButton" href="{% url 'game:game' storyboard.choice_attack %}">다음</a>
         </div>
     </div>
+    {% endif %}
     <nav class="eventContainer">
         <div id="damage">{{ storyboard.damage }}</div>
         <div id="attainedBrave">{{ storyboard.brave }}</div>

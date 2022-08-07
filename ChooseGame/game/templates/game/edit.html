@@ -3,27 +3,61 @@
 {% endblock css %}
 
 {% block content %}
-<form method="POST" name="frm" onSubmit="return Checkform()">
-    {% csrf_token %}
-    <div>
-        <textarea name="storyboard_name">{{ storyboard.storyboard_name }}</textarea>
+    <form method="POST" name="frm" onSubmit="return Checkform()">
+        {% csrf_token %}
+        <div>
+            <label for="storyboard_name">제목</label>
+            <br>
+            <input type="text" name="storyboard_name" value="{{ storyboard.storyboard_name }}">
+        </div>
+        <div>
+            <label for="content">내용</label>
+            <br>
+            <textarea name="content" style="height: 30vh; width:60vw;">{{ storyboard.content }}</textarea>
+        </div>
+        <div>
+            <label for="brave">용기 부여</label>
+            <br>
+            <input id="brave" class="brave" name="brave" value="{{storyboard.brave}}" type="number" min='-10' max="10">
+            <br>
+            <label for="wisdom">지혜 부여</label>
+            <br>
+            <input id="wisdom" class="wisdom" name="wisdom" value="{{storyboard.wisdom}}" type="number" min='-10' max="10">
+            <br>
+            <label for="damage">대미지(음수=힐)</label>
+            <br>
+            <input id="damage" class="damage" name="damage" value="{{storyboard.damage}}" type="number" min="-10" max="10">
+        </div>
+        <div>
+            <label for="attack">공격 선택지</label>
+            <br>
+            <input type="text" id="attack" name="choice_attack" value="{{ storyboard.choice_attack }}" list="attack_option">
+            <datalist id="attack_option">
+                {% for storyboard in storyboards %}
+                <option value="{{storyboard.storyboard_name}}"></option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div>
+            <label for="defence">수비 선택지</label>
+            <br>
+            <input type="text" id="defence" name="choice_defence" value="{{ storyboard.choice_defence }}" list="defence_option">
+            <datalist id="defence_option">
+                {% for storyboard in storyboards %}
+                <option value="{{storyboard.storyboard_name}}"></option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <button type="submit">수정하기</button>
+    </form>
+    <button class="delete_button" onclick="openModal()">삭제하기</button>
+    <div class="modal-container" onclick="closeModal()">
+        <div class="modal">
+            <div id="alert_message">삭제하시겠습니까?</div>
+            <button type="button" onclick="location.href='/delete/{{storyboard.storyboard_name}}'">예</button>
+            <button type="button" onclick="closeModal()">아니오</button>
+        </div>
     </div>
-    <div>
-        <textarea name="content">{{ storyboard.content }}</textarea>
-    </div>
-    <div>
-        <input class="brave" name="brave" value="{{ storyboard.brave }}" type="number" min='-10' max="10">
-        <input class="wisdom" name="wisdom" value="{{ storyboard.wisdom }}" type="number" min='-10' max="10">
-        <input class="damage" name="damage" value="{{ storyboard.damage }}" type="number" min="-10" max="10">
-    </div>
-    <div>
-        <textarea name="choice_attack">{{ storyboard.choice_attack }}</textarea>
-    </div>
-    <div>
-        <textarea name="choice_defence">{{ storyboard.choice_defence }}</textarea>
-    </div>
-    <button type="submit">수정하기</button>
-</form>
 <script>
     function Checkform() {
         if( frm.storyboard_name.value == "") {
@@ -46,6 +80,22 @@
             alert("수비 선택지와 연결되는 스토리보드의 이름을 입력해주세요.")
             return false;
         }
-    }
+        }
+
+
+    const body = $("body");
+    const modal = $(".modal-container");
+
+    const openModal = () => {
+        modal.classList.add("open");
+        body.style.overflow = "hidden"
+    };
+
+    const closeModal = () => {
+        modal.classList.remove("open") ;
+        body.style.overflow = "auto";
+    };
+
+
 </script>
 {% endblock content %}
