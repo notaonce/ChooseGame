@@ -1,0 +1,51 @@
+{% extends 'game/base.html' %} {% block css %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'game/edit.css' %}">
+{% endblock css %}
+
+{% block content %}
+<form method="POST" name="frm" onSubmit="return Checkform()">
+    {% csrf_token %}
+    <div>
+        <textarea name="storyboard_name">{{ storyboard.storyboard_name }}</textarea>
+    </div>
+    <div>
+        <textarea name="content">{{ storyboard.content }}</textarea>
+    </div>
+    <div>
+        <input class="brave" name="brave" value="{{ storyboard.brave }}" type="number" min='-10' max="10">
+        <input class="wisdom" name="wisdom" value="{{ storyboard.wisdom }}" type="number" min='-10' max="10">
+        <input class="damage" name="damage" value="{{ storyboard.damage }}" type="number" min="-10" max="10">
+    </div>
+    <div>
+        <textarea name="choice_attack">{{ storyboard.choice_attack }}</textarea>
+    </div>
+    <div>
+        <textarea name="choice_defence">{{ storyboard.choice_defence }}</textarea>
+    </div>
+    <button type="submit">수정하기</button>
+</form>
+<script>
+    function Checkform() {
+        if( frm.storyboard_name.value == "") {
+            frm.storyboard_name.focus()
+            alert("스토리보드명을 입력해주세요.")
+            return false;
+        }
+        if( frm.content.value == "") {
+            frm.storyboard_name.focus()
+            alert("지문을 입력해주세요.")
+            return false;
+        }
+        if( frm.choice_attack.value == "") {
+            frm.storyboard_name.focus()
+            alert("공격 선택지와 연결되는 스토리보드의 이름을 입력해주세요.")
+            return false;
+        }
+        if( frm.choice_defence.value == "") {
+            frm.storyboard_name.focus()
+            alert("수비 선택지와 연결되는 스토리보드의 이름을 입력해주세요.")
+            return false;
+        }
+    }
+</script>
+{% endblock content %}

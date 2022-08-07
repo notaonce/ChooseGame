@@ -27,6 +27,15 @@ li a:checked{
 
 }
 
+#message {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    background-color: grey;
+    width: 100%;
+    color: white;
+    padding: 3vh 0;
+}
 
 
 body {

@@ -1,0 +1,17 @@
+{% extends 'game/base.html' %} {% block css %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'game/list.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="bodyContainer">
+    {% for storyboard in storyboards %}
+        <div class="storyboard_name">
+            <a href="{% url 'game:edit' storyboard.storyboard_name %}">{{ storyboard.storyboard_name }}</a> 
+        </div>
+    {% endfor %}
+    <div class="new">
+        <a href="{% url 'game:new' %}">새로운 선택지 만들기</a>
+    </div>
+</div>
+
+{% endblock content %}

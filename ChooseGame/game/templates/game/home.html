@@ -12,5 +12,13 @@
     {% else %}
     <div class="loginFirst">로그인이 필요합니다.</div>
     {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+        <div id="message">
+            {{message}}
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
+
 {% endblock content %}

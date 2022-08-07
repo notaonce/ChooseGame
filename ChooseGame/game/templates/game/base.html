@@ -16,14 +16,39 @@
         <ul class="topMenuContainer">
             {% if user.is_authenticated %}
             <li class="topMenuItem" id="username">{{user.username}}</li>
+                {% if user.is_superuser %}
+                <li class="topMenuItem" id="superuserAlert">제작자 계정</li>
+                <li><a class="topMenuItem" id="list" href="{% url 'game:list' %}">게임 편집</a></li>
+                {% endif %}
             <li><a class="topMenuItem" id="logout" href="{% url 'game:logout' %}">로그아웃하기</a></li>
             {% else %}
             <li><a class="topMenuItem" id="login" href="{% url 'game:login' %}">로그인하기</a></li>
             <li><a class="topMenuItem" id="signup" href="{% url 'game:signup' %}">회원가입하기<a></a></li>
             {% endif %}
+            <li><a class="topMenuItem" id="toHome" href="{% url 'game:home' %}">홈으로</a></li>
         </ul>
     </nav>
-
     {% block content %} {% endblock content %}
 </body>
+<script type="text/javascript">
+    const $ = ( selector ) => document.querySelector( selector );
+    const message = $("#message");
+    const messageAutoDismiss = () => {
+        setTimeout(() => {
+        message.style.display='none';
+    }, 3000);
+    };
+    const checkNull = (value) => {
+        if (typeof value == "undefined" || value == "" || value == null){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    if(checkNull(message) == true){
+        messageAutoDismiss()
+    }
+
+</script>
 </html>
