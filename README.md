@@ -7,7 +7,6 @@
 
 
 ### 구현한 것
-복수의 app 연결
 
 회원가입 및 로그인
 
@@ -20,6 +19,9 @@
 
 django messages
 (로그인, 로그아웃, 사망 등 각종 알림 기능)
+
+복수 앱 사용(game, shopping)
+(shopping : 현재는 캐시 획득 외에 별다른 기능 없음. 해당 앱에서 캐쉬 교환이나 스토리 구매 등을 구현할 수 있음.)
 
 
 ### 보완할 점
@@ -36,4 +38,16 @@ django messages
   => 선택지들을 묶어서 모듈화 : 진행 중인 스토리에 랜덤으로 등장할 수 있게끔 함
 3. 정기 결제 도입
 4. 하루 행동력 제한 후 유료 과금으로 행동력 늘려주기
+
+
+### 이미지
+
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 27 06 PM" src="https://user-images.githubusercontent.com/87408958/183364468-cd4d7e5f-2eff-4562-9069-bd445a4c7c3b.png">
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 32 48 PM" src="https://user-images.githubusercontent.com/87408958/183364491-208b276f-7f2b-4149-9f22-ce6f6082c85a.png">
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 33 03 PM" src="https://user-images.githubusercontent.com/87408958/183364497-e7d51c40-25f1-4c53-ae5b-b3568678d407.png">
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 33 26 PM" src="https://user-images.githubusercontent.com/87408958/183364507-aa47e81a-275b-4bfa-a666-874f60a3a777.png">
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 33 46 PM" src="https://user-images.githubusercontent.com/87408958/183364516-881bdb06-cc89-484b-bbc6-54b809e006a7.png">
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 33 55 PM" src="https://user-images.githubusercontent.com/87408958/183364539-b781b43b-a587-4d26-a3c4-3c6dc390a4cd.png">
+<img width="1680" alt="Screen Shot 2022-08-08 at 4 34 20 PM" src="https://user-images.githubusercontent.com/87408958/183364560-9dc8bb1a-1fd3-483f-b76f-74c0fab4abc4.png">
+
 
