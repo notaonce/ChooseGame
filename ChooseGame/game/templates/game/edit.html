@@ -15,17 +15,17 @@
             <br>
             <textarea name="content" style="height: 30vh; width:60vw;">{{ storyboard.content }}</textarea>
         </div>
-        <div>
+        <div class="statusinput">
             <label for="brave">용기 부여</label>
-            <br>
+            
             <input id="brave" class="brave" name="brave" value="{{storyboard.brave}}" type="number" min='-10' max="10">
             <br>
             <label for="wisdom">지혜 부여</label>
-            <br>
+            
             <input id="wisdom" class="wisdom" name="wisdom" value="{{storyboard.wisdom}}" type="number" min='-10' max="10">
             <br>
             <label for="damage">대미지(음수=힐)</label>
-            <br>
+            
             <input id="damage" class="damage" name="damage" value="{{storyboard.damage}}" type="number" min="-10" max="10">
         </div>
         <div>
@@ -48,9 +48,9 @@
                 {% endfor %}
             </datalist>
         </div>
-        <button type="submit">수정하기</button>
+        <button type="submit" class="button1">수정하기</button>
     </form>
-    <button class="delete_button" onclick="openModal()">삭제하기</button>
+    <button class="button1" onclick="openModal()">삭제하기</button>
     <div class="modal-container" onclick="closeModal()">
         <div class="modal">
             <div id="alert_message">삭제하시겠습니까?</div>

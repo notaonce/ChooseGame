@@ -9,6 +9,7 @@
     <a class="start_button" href="{% url 'game:game' userstatus.savepoint %}" style="font-size: 40px; margin-top: 20px;">
         시작하기
     </a>
+    <div class="cash">현재 캐시 : {{usercash.cash}} </div>
     {% else %}
     <div class="loginFirst">로그인이 필요합니다.</div>
     {% endif %}

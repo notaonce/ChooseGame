@@ -24,7 +24,7 @@ class UserStatus(models.Model) :
     hp = models.IntegerField(default=5)
     brave = models.IntegerField(default=0)
     wisdom = models.IntegerField(default=0)
-    savepoint = models.CharField(default='0', max_length=100)
+    savepoint = models.CharField(default='beginning_0', max_length=100)
 
     def __str__(self):
         return f'{self.user}'

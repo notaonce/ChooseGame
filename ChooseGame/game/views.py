@@ -1,6 +1,7 @@
 import re
 from django.shortcuts import render, redirect
 from game.models import Storyboard, UserStatus
+from shopping.models import UserCash
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -11,7 +12,8 @@ from django.http import HttpResponse
 def home(request):
     if request.user.is_authenticated :
         userstatus = UserStatus.objects.get(user=request.user)
-        return render(request, 'game/home.html', {'userstatus':userstatus})
+        usercash = UserCash.objects.get(user=request.user)
+        return render(request, 'game/home.html', {'userstatus':userstatus , 'usercash':usercash})
     return render(request, 'game/home.html')
 
 
@@ -28,6 +30,9 @@ def signup(request):
             password=request.POST['password']
         )
             new_userStatic = UserStatus.objects.create(
+                user = new_user
+            )
+            new_userCash = UserCash.objects.create(
                 user = new_user
             )
         auth.login(
@@ -103,7 +108,7 @@ def game(request, storyboardname) :
 def result(request) :
     UserStatus.objects.filter(user=request.user).update(
         hp=5,
-        savepoint='0',
+        savepoint='beginning_0',
         brave=0,
         wisdom=0,
     )

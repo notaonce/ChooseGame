@@ -20,6 +20,7 @@
                 {% if user.is_superuser %}
                 <li class="topMenuItem" id="superuserAlert">제작자 계정</li>
                 <li><a class="topMenuItem" id="list" href="{% url 'game:list' %}">편집하기</a></li>
+                <li><a class="topMenuItem" id="cashGain" href="{% url 'shopping:cash' %}">캐시 획득</a></li>
                 {% endif %}
             <li><a class="topMenuItem" id="logout" href="{% url 'game:logout' %}">로그아웃하기</a></li>
             {% else %}

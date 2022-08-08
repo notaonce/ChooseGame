@@ -2,8 +2,19 @@ form {
     display: flex;
     text-align: center;
     flex-direction: column;
+    align-items: center;
+    margin-bottom: 1vh;
 }
 
+form div {
+    padding: 1vh;
+}
+
+.button1 {
+    width : 20vw;
+    height : 5vh;
+
+}
 
 .modal-container {
     z-index: 5;
@@ -47,4 +58,11 @@ form {
 .modal-container.open {
     opacity: 1;
     visibility: visible;
+}
+
+.statusinput {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
 }
